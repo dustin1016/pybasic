@@ -1,3 +1,5 @@
+print("tae")
+
 def get_data_type(value):
     return f"The data type of {value} is {type(value).__name__}"
 

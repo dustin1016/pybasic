@@ -11,4 +11,5 @@ x = "hello"
 # print(isinstance(x, int))
 b = True
 f = str(b)
-print(eval_bool(b))
+# print(eval_bool(b))
+getdatatype.main()
