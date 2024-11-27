@@ -17,3 +17,4 @@ data.append(newdata)
 #save the updated data to the file
 with open("data.txt", "w") as file:
     file.write(str(data))
+
