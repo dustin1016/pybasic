@@ -1,4 +1,5 @@
 import ast
+import pprint
 file = open("data.txt", "r")
 
 rawdata = file.read()
@@ -13,8 +14,10 @@ newdata = {
 }
 
 data.append(newdata)
-
+data.pop(2)
+data.sort()
+pprint.pprint(data)
 #save the updated data to the file
-with open("data.txt", "w") as file:
-    file.write(str(data))
+# with open("data.txt", "w") as file:
+#     file.write(str(data))
 

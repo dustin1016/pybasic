@@ -11,8 +11,8 @@ class Dog(Animal):  # Dog inherits from Animal
     def speak(self):
         return "Woof!"
     
-    # def rollover(self):
-    #     print("doggie roll")
+    def rollover(self):
+        print("doggie roll")
 
 dog = Dog()
 animal = Animal()
