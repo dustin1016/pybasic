@@ -11,15 +11,19 @@ def setup_account():
     global user
     try:
         name = input("Please Enter your Name:")
-        balance = float(input("Please Enter your initial deposit:"))
-
-    
+        if name == "":
+            raise ValueError("Name cannot be empty")
+        balance = float(input("Please Enter your initial deposit:"))       
+        
+        if balance < 0:
+            raise ValueError
 
         ##set the client
         user = Client(name, balance)
-        print(f"\nYou have successfully created an account, {user.getName()}")
+        print(f"\n{GREEN}You have successfully created an account, {user.getName()}.{RESET}")
     except ValueError:
-        print(f"\n{RED}Error Creating Account: Initial Balance must be a number.{RESET}")
+        print(f"\n{RED}Error Creating Account: Initial Balance must be a non-negative number.{RESET}")
+        # print(f"Error: {e}")
 
 
 def user_exists():
@@ -31,6 +35,7 @@ def user_exists():
 
 
 def check_balance_withdraw(amount) -> bool:
+    ##check the amount against the current balance
     current_balance = user.get_balance()
     if current_balance >= amount: 
         return True
@@ -59,7 +64,7 @@ def cash_app():
                     setup_account()
                 else:
                     overwrite = input(f"\n{YELLOW}Another account is currently active, do you want to overwrite it? Y/N: {RESET}")
-                    if overwrite == "Y":
+                    if overwrite == "Y" or overwrite == "y":
                         setup_account()
             elif choice == 2:
                 if user_exists():
@@ -85,9 +90,12 @@ def cash_app():
                     try:
                         amount = float(input(f"{YELLOW}Enter amount to withdraw: {RESET}"))
                         if check_balance_withdraw(amount):
-                            user.withdraw(amount)
-                            print(f"\n{GREEN} You have successfully withdrawn {amount} from your Account {RESET}")
-                            print(f"{GREEN} Your new Balance is {user.get_balance()} {RESET}")
+                            if amount >= 0:
+                                user.withdraw(amount)
+                                print(f"\n{GREEN} You have successfully withdrawn {amount} from your Account {RESET}")
+                                print(f"{GREEN} Your new Balance is {user.get_balance()} {RESET}")
+                            else:
+                                print(f"\n{RED}Error - Amount must be a non-negative number. {RESET}")
                     except ValueError:
                         print(f"\n{RED}Error - Amount must be a non-negative number. {RESET}")
                         

@@ -1,13 +1,15 @@
 class Client:
     def __init__(self, name, balance):
-        self.__name = name
+        self.__name = name.strip()
         self.__balance = balance
+
+
 
     def getName(self):
         return self.__name
     
     def setName(self, name):
-        if isinstance(name, str) and name.strip():  # Ensure 'name' is a valid string
+        if name != "" and name.strip():  # Ensure 'name' is a valid string
             self.__name = name
         else:
             raise ValueError("Name must be a non-empty string.")
